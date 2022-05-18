@@ -1,0 +1,38 @@
+sensor:
+  - platform: mqtt
+    name: "AC Temp"
+    state_topic: "homeassistant/inverter"
+    unit_of_measurement: "°C"
+    value_template: "{{ value_json.ac_temp }}"
+    availability:
+      - topic: "homeassistant/inverter/status"
+    payload_available: "online"
+    payload_not_available: "offline"
+  - platform: mqtt
+    name: "AC Daily Gen"
+    state_topic: "homeassistant/inverter"
+    unit_of_measurement: "MWh"
+    value_template: "{{ value_json.ac_daily_gen }}"
+    availability:
+      - topic: "homeassistant/inverter/status"
+    payload_available: "online"
+    payload_not_available: "offline"
+  - platform: mqtt
+    name: "AC Voltage"
+    state_topic: "homeassistant/inverter"
+    unit_of_measurement: "V"
+    value_template: "{{ value_json.ac_voltage }}"
+    availability:
+      - topic: "homeassistant/inverter/status"
+    payload_available: "online"
+    payload_not_available: "offline"
+  - platform: mqtt
+    name: "AC Power"
+    state_topic: "homeassistant/inverter"
+    unit_of_measurement: "W"
+    value_template: "{{ value_json.ac_power }}"
+    availability:
+      - topic: "homeassistant/inverter/status"
+    payload_available: "online"
+    payload_not_available: "offline"
+
