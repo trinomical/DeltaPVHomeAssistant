@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 use Device::Inverter::Delta;
-use Net::MQTT::Simple "192.168.1.101""; #your mqtt server hostname
+use Net::MQTT::Simple "192.168.1.101"; #your mqtt server hostname
 use JSON;
 
 my $ha_mqtt_topic = 'homeassistant/inverter';
@@ -35,10 +35,10 @@ if(defined($gen)){
     if(defined($ha_data{ac_temp})){
         print "AC Temp: ".$ha_data{ac_temp}." C\n";
     }
+    my $json = encode_json \%ha_data;
+    retain $ha_mqtt_topic => $json;
 }else{
     $ha_status = 'offline';
-    print "Inverter Offline\n"
+    print "Inverter Offline\n";
 }
-my $json = encode_json \%ha_data;
 retain $ha_mqtt_availability_topic => $ha_status;
-retain $ha_mqtt_topic => $json;
